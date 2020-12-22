@@ -2,9 +2,12 @@ package main
 
 import (
 	"bufio"
+	"encoding/json"
 	"fmt"
+	"log"
 	"math/rand"
 	"os"
+	"time"
 	// pakai strconv ubah tipe data
 )
 
@@ -37,6 +40,7 @@ func main() {
 
 	// fmt.Println("Your Name is : ", myname(instxt))
 	// fmt.Printf("Your age will be %d in 2020\n", 2020-ins)
+
 }
 
 func mainTosee() {
@@ -47,7 +51,8 @@ func mainTosee() {
 		fmt.Println("1. Input your data")
 		fmt.Println("2. Input your Blood type")
 		fmt.Println("3. Check are you a vampire ?")
-		fmt.Println("4. Exit")
+		fmt.Println("4. Testing struck")
+		fmt.Println("5. Exit")
 		fmt.Print("Choose : ")
 
 		fmt.Scan(&cek)
@@ -61,11 +66,48 @@ func mainTosee() {
 		case 3:
 			vampire()
 			break
+		case 4:
+			testStruct()
+			break
 		}
-		if cek == 4 {
+
+		if cek == 5 {
 			break
 		}
 	}
+}
+
+func testStruct() {
+	// var emp employe
+	// emp.firstname = "Aldi"
+	// emp.lastname = "Nugroho"
+	// emp.salary = 20000000
+	// emp.fulltime = true
+
+	// fmt.Println("Firstname : " + emp.firstname)
+	// fmt.Println("Lastname : " + emp.lastname)
+	// fmt.Println("Salary : " + strconv.Itoa(emp.salary))
+	// fmt.Println("Job Type : " + strconv.FormatBool(emp.fulltime))
+	// fmt.Println("please type enter to JSON...")
+	// fmt.Scanln()
+	type employe struct {
+		Firstname string
+		Lastname  string
+		Created   time.Time
+	}
+
+	list := employe{
+		Firstname: "Aldi",
+		Lastname:  "Nugroho",
+		Created:   time.Now(),
+	}
+
+	var jsonData []byte
+	jsonData, err := json.MarshalIndent(list, "", "    ")
+	if err != nil {
+		log.Println(err)
+	}
+	fmt.Println(string(jsonData))
 }
 
 func vampire() {
